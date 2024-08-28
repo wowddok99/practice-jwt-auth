@@ -1,0 +1,30 @@
+# key? 32byte (256bit)
+jwt:
+  secretKey: 12345678901234567890123456789012
+  refreshKey: 12345678901234567890123456789012
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${db.url:jdbc:mysql://localhost:3307/demo?allowPublicKeyRetrieval=true}
+    username: ${db.username:root}
+    password: ${db.password:root}
+    hikari: # Hikari Pool, Connection Pool
+      connectionTimeout: 10000
+      idleTimeout: 600000
+      maximum-pool-size: 300
+      minimum-idle: 5
+      maxLifetime: 100000
+      leak-detection-threshold: 2000
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
